@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <arg name="odom_topic" value="/state_ukf/odom" />
+<!--   <arg name="global_env_pcd2_topic" value="cloud_pcd" /> -->
+  <arg name="global_env_pcd2_topic" value="/random_forest/all_map" />
+  <arg name="map_size_x" value="40" />
+  <arg name="map_size_y" value="40" />
+  <arg name="map_size_z" value="5" />
+  <arg name="origin_x" value="-20.0" />
+  <arg name="origin_y" value="-20.0" />
+  <arg name="origin_z" value="0.0" />
+  <arg name="resolution_sdf" value="0.2" />
+  <arg name="clear_radius" value="1.0" />
+
+  <node pkg="plan_env" type="plan_env" name="plan_env" output="screen" > 
+    <!-- sdf map topic remap -->
+    <remap from="/odom_world" to="/drone_1/state_ukf/odom"/>
+    <remap from="/sdf_map/odom" to="/drone_1/state_ukf/odom"/>
+    <remap from="/sdf_map/cloud" to="/pcl_render_node/cloud"/>
+    <!--remap from = "/sdf_map/pose"   to = "$(arg camera_pose_topic)"/--> 
+    <remap from = "/sdf_map/depth" to = "/pcl_render_node/depth"/>
+    
+    <!-- sdf map params -->
+    <!--aram name="sdf_map/origin_x" value="$(arg origin_x)" type="double"/>
+    <param name="sdf_map/origin_y" value="$(arg origin_y)" type="double"/>
+    <param name="sdf_map/origin_z" value="$(arg origin_z)" type="double"/>
+    <param name="sdf_map/map_size_x" value="$(arg map_size_x)" type="double"/>
+    <param name="sdf_map/map_size_y" value="$(arg map_size_y)" type="double"/>
+    <param name="sdf_map/map_size_z" value="$(arg map_size_z)" type="double"/>
+    <param name="sdf_map/resolution_sdf" value="$(arg resolution_sdf)" type="double"/>
+    <param name="sdf_map/ceil_height" value="3.0" type="double"/>
+    <param name="sdf_map/update_rate" value="2.0" type="double"/>
+    <param name="sdf_map/update_range" value="30.0" type="double"/>
+    <param name="sdf_map/inflate" value="0.0" type="double"/>
+    <param name="sdf_map/radius_ignore" value="1.0" type="double"/>
+    <param name="sdf_map/pose_type"     value="2"/>  
+    
+    <param name="sdf_map/cx" value="321.04638671875"/>
+    <param name="sdf_map/cy" value="243.44969177246094"/>
+    <param name="sdf_map/fx" value="387.229248046875"/>
+    <param name="sdf_map/fy" value="387.229248046875"/>
+    
+    <param name="sdf_map/use_depth_filter" value="false" type="bool"/>
+    <param name="sdf_map/depth_filter_tolerance" value="0.15"/>
+    <param name="sdf_map/depth_filter_maxdist"   value="5.0"/>
+    <param name="sdf_map/depth_filter_mindist"   value="0.2"/>
+    <param name="sdf_map/depth_filter_margin"    value="2"/>
+    <param name="sdf_map/k_depth_scaling_factor" value="1000.0"/>
+    <param name="sdf_map/skip_pixel" value="2"/>
+    
+    <param name="sdf_map/min_ray_length" value="0.15"/>
+    <param name="sdf_map/max_ray_length" value="5.0"/>
+    
+    <param name="sdf_map/use_local_map" value="false" type="bool"/>
+    <param name="sdf_map/use_global_map" value="true" type="bool"/-->
+
+
+
+    <param name="sdf_map/resolution"      value="0.1" /> 
+    <param name="sdf_map/map_size_x"   value="$(arg map_size_x)" /> 
+    <param name="sdf_map/map_size_y"   value="$(arg map_size_y)" /> 
+    <param name="sdf_map/map_size_z"   value="$(arg map_size_z)" /> 
+    <param name="sdf_map/local_update_range_x"  value="5.5" /> 
+    <param name="sdf_map/local_update_range_y"  value="5.5" /> 
+    <param name="sdf_map/local_update_range_z"  value="4.5" /> 
+    <param name="sdf_map/obstacles_inflation"     value="0.099" /> 
+    <param name="sdf_map/local_bound_inflate"    value="0.0"/>
+    <param name="sdf_map/local_map_margin" value="50"/>
+    <param name="sdf_map/ground_height"        value="-1.0"/>
+    <!-- camera parameter -->
+    <param name="sdf_map/cx" value="321.04638671875"/>
+    <param name="sdf_map/cy" value="243.44969177246094"/>
+    <param name="sdf_map/fx" value="387.229248046875"/>
+    <param name="sdf_map/fy" value="387.229248046875"/>
+    <!-- depth filter -->
+    <param name="sdf_map/use_depth_filter" value="true"/>
+    <param name="sdf_map/depth_filter_tolerance" value="0.15"/>
+    <param name="sdf_map/depth_filter_maxdist"   value="5.0"/>
+    <param name="sdf_map/depth_filter_mindist"   value="0.2"/>
+    <param name="sdf_map/depth_filter_margin"    value="2"/>
+    <param name="sdf_map/k_depth_scaling_factor" value="1000.0"/>
+    <param name="sdf_map/skip_pixel" value="2"/>
+    <!-- local fusion -->
+    <param name="sdf_map/p_hit"  value="0.65"/>
+    <param name="sdf_map/p_miss" value="0.35"/>
+    <param name="sdf_map/p_min"  value="0.12"/>
+    <param name="sdf_map/p_max"  value="0.90"/>
+    <param name="sdf_map/p_occ"  value="0.80"/>
+    <param name="sdf_map/min_ray_length" value="0.5"/>
+    <param name="sdf_map/max_ray_length" value="4.5"/>
+
+    <param name="sdf_map/esdf_slice_height" value="0.3"/>
+    <param name="sdf_map/visualization_truncate_height"   value="2.49"/>
+    <param name="sdf_map/virtual_ceil_height"   value="2.5"/>
+    <param name="sdf_map/show_occ_time"  value="false"/>
+    <param name="sdf_map/show_esdf_time" value="false"/>
+    <param name="sdf_map/pose_type"     value="1"/>  
+    <param name="sdf_map/frame_id"      value="map"/>
+  
+  </node>
+    
+
+    
+</launch>

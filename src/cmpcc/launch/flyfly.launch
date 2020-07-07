@@ -1,0 +1,11 @@
+<launch>
+
+<node pkg="rostopic" type="rostopic" name="global_traj" args="pub --once /tr_node/space_time_traj quadrotor_msgs/SpatialTemporalTrajectory -f $(find trr_global_planner)/config/traj.yaml" output="screen">
+<remap from="global_traj" to="/tr_node/space_time_traj"/>
+</node>
+<node pkg="rostopic" type="rostopic" name="corridors" args="pub --once /tr_node/polyhedron_corridor_mesh decomp_ros_msgs/PolyhedronArray -f $(find trr_global_planner)/config/corridor.yaml" output="screen">
+<remap from="corridors" to="/tr_node/polyhedron_corridor_mesh"/>
+</node>
+<node pkg="flight_tunnel" type="flyfly_node" name="flyfly_node" output="screen"/>
+
+</launch>

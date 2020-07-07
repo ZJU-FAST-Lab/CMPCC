@@ -1,0 +1,61 @@
+<launch>
+
+<node pkg="rostopic" type="rostopic" name="corridors" args="pub --once corridors decomp_ros_msgs/PolyhedronArray -f $(find flight_tunnel)/config/corridor.yaml" output="screen">
+<remap from="corridors" to="/polyhedron_corridor_mesh"/>
+</node>
+
+<arg name="map_size_x" default="20.0"/>
+<arg name="map_size_y" default="20.0"/>
+<arg name="map_size_z" default=" 3.0"/>
+
+<arg name="init_x" default="-8.0"/>
+<arg name="init_y" default="-8.0"/>
+<arg name="init_z" default=" 2.0"/>
+
+<node pkg ="environment" name ="generate_map_node" type ="generate_map_node" output = "screen">
+    <remap from="~odometry"       to="/drone_1/visual_slam/odom"/>
+
+    <param name="init_state_x"   value="$(arg init_x)"/>
+    <param name="init_state_y"   value="$(arg init_y)"/>
+
+    <param name="map/x_size"     value="$(arg map_size_x)" />
+    <param name="map/y_size"     value="$(arg map_size_y)" />
+    <param name="map/z_size"     value="$(arg map_size_z)" />
+
+    <param name="map/circle_num" value="50"/>        
+    <param name="map/obs_num"    value="150"/>        
+    <param name="map/resolution" value="0.1"/>        
+
+    <param name="ObstacleShape/lower_rad" value="0.1"/>
+    <param name="ObstacleShape/upper_rad" value="0.7"/>
+    <param name="ObstacleShape/lower_hei" value="1.0"/>
+    <param name="ObstacleShape/upper_hei" value="3.0"/>
+
+    <param name="CircleShape/lower_circle_rad"   value="0.6"/>        
+    <param name="CircleShape/upper_circle_rad"   value="2.0"/>        
+    
+    <param name="sensing/rate"   value="0.5"/>   
+
+    <param name="map/file_name"   value="random_map.pcd"/>      
+</node>
+
+<node pkg="tf" type="static_transform_publisher" name="set_fix_frame" 
+    args="1 0 0 0 0 0 1 map base_link 50" >
+</node>
+<node pkg="rviz" name="rviz" type="rviz" output="log"
+args="-d $(find environment)/config/rviz_vis.rviz"/>
+<remap from="drone_1/visual_slam/odom" to="drone_1/state_ukf/odom"/>
+
+<node pkg="odom_visualization" name="odom_visualization" type="odom_visualization" output="screen">
+    <remap from="~odom" to="/vins_estimator/imu_propagate"/>
+    <param name="base_frame"       value="/map"/>
+    <param name="target_frame"     value="/map"/>
+    <param name="tf45"     value="true"/>
+    <param name="color/a" value="0.8"/>    
+    <param name="color/r" value="1.0"/>        
+    <param name="color/g" value="0.0"/>        
+    <param name="color/b" value="0.0"/>       
+    <param name="covariance_scale" value="100.0"/>       
+</node>
+
+</launch>

@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="flight_tunnel" name="plot_bag_node" type="plot_bag_node" output="screen"> 
+        <param name="start_time" value="1593240499.118571545"/>
+    </node>
+</launch>
