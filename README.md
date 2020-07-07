@@ -9,7 +9,6 @@ CMPCC is an efficient, receding horizon, local adaptive low level planner as the
 
 ![](figs/1.gif)
 ![](figs/2.gif)
-![](figs/3.gif)
 
 Complete video: [cmpcc-video](https://www.youtube.com/watch?v=_7CzBh-0wQ0)
 
@@ -25,7 +24,7 @@ Key modules are contained in the ros package **src/cmpcc**. A lightweight simula
 - The simulator depends on the C++ linear algebra library Armadillo, which can be installed by sudo apt-get install libarmadillo-dev.
 
 ## Build on ROS
-After the prerequisites are satisfied, you can clone this repository, which is a already ros-workspace:
+After the prerequisites are satisfied, you can clone this repository, which is already a ros-workspace:
 ```
 git clone https://github.com/ZJU-FAST-Lab/CMPCC.git
 cd CMPCC
