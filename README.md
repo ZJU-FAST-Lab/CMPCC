@@ -4,7 +4,7 @@ Corridor-based Model Predictive Contouring Control for Aggressive Drone Flight
 ## Overview
 CMPCC is an efficient, receding horizon, local adaptive low level planner as the middle layer between our original planner and controller. It contains following features: 
 -  online flight speed optimization
--  strict safety and feasibility
+-  strict safety and feasibility
 -  real-time performance
 
 ![](figs/1.gif)
