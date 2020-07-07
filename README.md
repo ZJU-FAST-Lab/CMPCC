@@ -12,7 +12,7 @@ CMPCC is an efficient, receding horizon, local adaptive low level planner as the
 
 Complete video: [cmpcc-video](https://www.youtube.com/watch?v=_7CzBh-0wQ0)
 
-paper summited: [cmpcc-paper]()
+paper summited: [cmpcc-paper]() 
 
 ### File Structure
 Key modules are contained in the ros package **src/cmpcc**. A lightweight simulator is contained in **src/simualtion** and some functional codes and plugins are in **src/utils**. 
