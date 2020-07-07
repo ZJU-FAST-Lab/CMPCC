@@ -8,7 +8,6 @@ Panels:
         - /Status1
         - /Axes1
         - /Drone1/Robot1
-        - /GlobalMap1
         - /GlobalMap1/GlobalMap1
         - /Planning1/SpatialCurve1
         - /Planning1/SpatialCurve1/Namespaces1
@@ -16,12 +15,11 @@ Panels:
         - /Planning1/many ReplanTraj1
         - /Planning1/initialReplanPts1
         - /Sensors1/SensedPoints_gpu1
-        - /PolyhedronArray1
-        - /Path1
-        - /PolyhedronArray2
-        - /Path2
-        - /Marker1
-        - /history_view_cloud1
+        - /Reference_traj1
+        - /Tubes1
+        - /Predictive_traj1
+        - /Global_pose1
+        - /Drone_pose1
       Splitter Ratio: 0.5777778029441833
     Tree Height: 886
   - Class: rviz/Selection
@@ -287,7 +285,7 @@ Visualization Manager:
       Class: decomp_rviz_plugins/PolyhedronArray
       Enabled: true
       MeshColor: 0; 170; 255
-      Name: PolyhedronArray
+      Name: Corridor
       Scale: 0.10000000149011612
       State: Mesh
       Topic: /polyhedron_corridor_mesh
@@ -305,7 +303,7 @@ Visualization Manager:
       Length: 0.30000001192092896
       Line Style: Billboards
       Line Width: 0.05000000074505806
-      Name: Path
+      Name: Reference_traj
       Offset:
         X: 0
         Y: 0
@@ -323,7 +321,7 @@ Visualization Manager:
       Class: decomp_rviz_plugins/PolyhedronArray
       Enabled: true
       MeshColor: 85; 255; 255
-      Name: PolyhedronArray
+      Name: Tubes
       Scale: 0.009999999776482582
       State: Both
       Topic: /flight_tunnel
@@ -341,7 +339,7 @@ Visualization Manager:
       Length: 0.30000001192092896
       Line Style: Billboards
       Line Width: 0.10000000149011612
-      Name: Path
+      Name: Predictive_traj
       Offset:
         X: 0
         Y: 0
@@ -357,7 +355,7 @@ Visualization Manager:
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /global_pose
-      Name: Marker
+      Name: Global_pose
       Namespaces:
         "": true
       Queue Size: 100
@@ -365,190 +363,10 @@ Visualization Manager:
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /drone_pose
-      Name: Marker
+      Name: Drone_pose
       Namespaces:
         "": true
       Queue Size: 100
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 0; 0; 0
-      Color Transformer: FlatColor
-      Decay Time: 0
-      Enabled: false
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: local_map
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.20000000298023224
-      Style: Flat Squares
-      Topic: /pcl_render_node/cloud
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: false
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 2.049999952316284
-        Min Value: -0.05000000074505806
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: AxisColor
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: history_view_cloud
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.30000001192092896
-      Style: Flat Squares
-      Topic: /sdf_map/occupancy_inflate
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: PointCloud2
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.009999999776482582
-      Style: Flat Squares
-      Topic: /sdf_map/occupancy
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: ""
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: PointCloud2
-      Position Transformer: ""
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.009999999776482582
-      Style: Flat Squares
-      Topic: /sdf_map/depth_cloud
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: ""
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: PointCloud2
-      Position Transformer: ""
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.009999999776482582
-      Style: Flat Squares
-      Topic: /sdf_map/esdf
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: ""
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: PointCloud2
-      Position Transformer: ""
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.009999999776482582
-      Style: Flat Squares
-      Topic: /sdf_map/unknown
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
       Value: true
   Enabled: true
   Global Options:
@@ -571,15 +389,15 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 27.72802734375
+      Distance: 27.328744888305664
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.27662062644958496
-        Y: -5.9109344482421875
+        X: -0.1964404582977295
+        Y: -5.331633567810059
         Z: 6.208183094713604e-6
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806

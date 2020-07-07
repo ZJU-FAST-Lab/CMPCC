@@ -130,8 +130,7 @@ int main(int argc, char **argv)
     refer_pub = nodeHandle.advertise<nav_msgs::Path>("refer_path", 1000);
     drone_pub = nodeHandle.advertise<visualization_msgs::Marker>("drone_pose", 1000);
     global_pub = nodeHandle.advertise<visualization_msgs::Marker>("global_pose", 1000);
-    ros::Subscriber sub_odom = nodeHandle.subscribe("drone_1/state_ukf/odom", 5 , odom_callback, ros::TransportHints().tcpNoDelay());
-    // ros::Subscriber sub_odom = nodeHandle.subscribe("/drone_1/visual_slam/odom", 5 , odom_callback);
+    ros::Subscriber sub_odom = nodeHandle.subscribe("drone_1/visual_slam/odom", 5 , odom_callback, ros::TransportHints().tcpNoDelay());
     vis_polytope_pub  = nodeHandle.advertise<decomp_ros_msgs::PolyhedronArray>("polyhedron_corridor_mesh", 1000, true);
     flight_tunnel_pub = nodeHandle.advertise<decomp_ros_msgs::PolyhedronArray>("flight_tunnel", 1000, true);
     predict_pub = nodeHandle.advertise<nav_msgs::Path>("predict_path", 1000);
@@ -139,7 +138,6 @@ int main(int argc, char **argv)
 
     ros::Timer timer_mpc = nodeHandle.createTimer(ros::Duration(mpcT), mpc_callback);
     ros::Timer timer_cmd = nodeHandle.createTimer(ros::Duration(0.01), cmd_callback);
-    // ros::Timer timer_safe = nodeHandle.createTimer(ros::Duration(0.005), safe_callback);
 
     ros::MultiThreadedSpinner spinner(4);
 

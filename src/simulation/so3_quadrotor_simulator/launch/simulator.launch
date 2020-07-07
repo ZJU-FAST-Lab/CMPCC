@@ -10,18 +10,10 @@
      <remap from="~cmd" to="so3_cmd"/>
      <remap from="~imu" to="drone_1/sim/imu"/>     
    </node>
-
-  <node pkg="so3_disturbance_generator" name="so3_disturbance_generator" type="so3_disturbance_generator" output="screen">
-        <remap from="~odom" to="drone_1/visual_slam/odom"/>             
-        <remap from="~noisy_odom" to="drone_1/state_ukf/odom"/>          
-        <remap from="~correction" to="drone_1/visual_slam/correction"/>   
-        <remap from="~force_disturbance" to="force_disturbance"/>        
-        <remap from="~moment_disturbance" to="moment_disturbance"/>            
-  </node> 
  
    <!-- Controller -->  
    <node pkg="nodelet" type="nodelet" args="standalone so3_control/SO3ControlNodelet" name="so3_control" required="true" output="screen">
-     <remap from="~odom" to="drone_1/state_ukf/odom"/>
+     <remap from="~odom" to="drone_1/visual_slam/odom"/>
      <remap from="~position_cmd" to="drone_1/position_cmd"/>
      <remap from="~motors" to="motors"/>
      <remap from="~corrections" to="corrections"/>
