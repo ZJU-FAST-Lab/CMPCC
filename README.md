@@ -15,19 +15,43 @@ Complete video: [cmpcc-video](https://www.youtube.com/watch?v=_7CzBh-0wQ0)
 paper summited: [cmpcc-paper](https://arxiv.org/abs/2007.03271) 
 
 ### File Structure
-Key modules are contained in the ros package **src/cmpcc**. A lightweight simulator is contained in **src/simualtion** and some functional codes and plugins are in **src/utils**. 
+- **src/cmpcc**: key module of CMPCC, which is a single ros package 
+- **src/simualtion**: a lightweight simulator for quadrotors 
+- **src/utils**: some functional codes and plugins
+- **osqp**: a copy of [OSQP](https://osqp.org/) source code for solving qp problem.
 
 ## Prerequisites
-- Our software is developed and tested in Ubuntu 18.04, ROS Melodic. Other version may require minor modification. 
-- We use [OSQP](https://github.com/oxfordcontrol/osqp) to solve the qp problem.
-- The cmpcc package depends on [yaml-cpp](https://github.com/jbeder/yaml-cpp) to read parameters of map and corridor.
-- The simulator depends on the C++ linear algebra library Armadillo, which can be installed by sudo apt-get install libarmadillo-dev.
+Our software is developed and tested in Ubuntu 18.04, ROS Melodic. Other version may require minor modification. 
 
-## Build on ROS
-After the prerequisites are satisfied, you can clone this repository, which is already a ros-workspace:
+You can clone this 
 ```
 git clone https://github.com/ZJU-FAST-Lab/CMPCC.git
 cd CMPCC
+```
+To install the following dependencies, you can run the auto-install script by
+```
+chmod +x install_tools.sh
+./install_tools.sh
+```
+If failed, you can manually install them one by one:
+- install dependencies
+```
+sudo apt-get install libyaml-cpp-dev
+sudo apt-get install libarmadillo-dev
+```
+- install osqp
+```
+cd osqp
+mkdir build
+cd build
+cmake -G "Unix Makefiles" ..
+cmake --build .
+sudo cmake --build . --target install
+```
+
+## Build on ROS
+After the prerequisites are satisfied, you can catkin_make in this repository directory, which is already a ros-workspace:
+```
 catkin_make
 ``` 
 
