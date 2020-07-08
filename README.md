@@ -19,6 +19,7 @@ paper summited: [cmpcc-paper](https://arxiv.org/abs/2007.03271)
 - **src/simualtion**: a lightweight simulator for quadrotors 
 - **src/utils**: some functional codes and plugins
 - **osqp**: a copy of [OSQP](https://osqp.org/) source code for solving qp problem.
+- **key2joy.py**: a user-interface tool based on pygame for setting disturbance
 
 ## 1. Prerequisites
 Our software is developed and tested in Ubuntu 18.04, ROS Melodic. Other version may require minor modification. 
@@ -39,7 +40,13 @@ If failed, you can manually install them one by one:
 sudo apt-get install libyaml-cpp-dev
 sudo apt-get install libarmadillo-dev
 ```
+- install pygame for key2joy.py
+```
+sudo apt-get install python-pip
+pip install pygame
+```
 - install osqp
+
 ```
 cd osqp
 mkdir build
@@ -60,6 +67,7 @@ catkin_make
 source devel/setup.bash
 ./simulation.sh
 ```
+You can set wind disturbance with keyboard "WASD". The default disturbance is quite fierce. If the drone flew outside the corridor, you would have to relauch the nodes.
 
 ## 4. Licence
 The source code is released under [GPLv3](http://www.gnu.org/licenses/) license.

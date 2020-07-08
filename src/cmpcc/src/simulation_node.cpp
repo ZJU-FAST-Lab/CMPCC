@@ -5,6 +5,7 @@
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/Imu.h>
 #include <ros/ros.h>
+#include <sensor_msgs/Joy.h>
 #include "mpc_solver.h"
 
 using namespace std;
@@ -35,6 +36,9 @@ int fail_times = 0;
 Eigen::SparseMatrix<double> stateL;
 Eigen::SparseMatrix<double> stateR;
 bool state_predict_done = false;
+
+double wind_x = 0;
+double wind_y = 0;
 
 void odom_callback(const nav_msgs::Odometry& odom){
     odomRead = true;
@@ -70,6 +74,14 @@ void mpc_callback(const ros::TimerEvent& event){
         stateMpc.coeffRef(10, 0) = 0;
         stateMpc.coeffRef(11, 0) = 0;
         simSolver.initStatus = true;
+        mpcInit = false;
+        if( simSolver.solveMpcQp(stateMpc) ){
+            cout << "come on! your disturbance too fierce!" << endl;
+            ros::shutdown();
+        }
+        else{
+            fail_times = 0;
+        }
     }
     else{
         stateMpc.coeffRef(2, 0) = simSolver.statePredict.coeffRef(2, 1); // ax
@@ -77,14 +89,15 @@ void mpc_callback(const ros::TimerEvent& event){
         stateMpc.coeffRef(8, 0) = simSolver.statePredict.coeffRef(8, 1); // az
         stateMpc.coeffRef(10,0) = simSolver.statePredict.coeffRef(10,1); // vtheta
         stateMpc.coeffRef(11,0) = simSolver.statePredict.coeffRef(11,1); // atheta
+        mpcInit = false;
+        if( simSolver.solveMpcQp(stateMpc) ){
+            fail_times ++;
+        }
+        else{
+            fail_times = 0;
+        }
     }
-    mpcInit = false;
-    if( simSolver.solveMpcQp(stateMpc) ){
-        fail_times ++;
-    }
-    else{
-        fail_times = 0;
-    }
+
     state_predict_done = true;
     
     refer_pub.publish(simSolver.displayPtr->refTraj_msg);
@@ -108,8 +121,8 @@ void cmd_callback(const ros::TimerEvent& event){
         tmpVector.y = stateCmd.coeffRef(4,0);
         tmpVector.z = stateCmd.coeffRef(7,0);
         cmdMsg.velocity = tmpVector;
-        tmpVector.x = stateCmd.coeffRef(2,0);
-        tmpVector.y = stateCmd.coeffRef(5,0);
+        tmpVector.x = stateCmd.coeffRef(2,0) + wind_x;
+        tmpVector.y = stateCmd.coeffRef(5,0) + wind_y;
         tmpVector.z = stateCmd.coeffRef(8,0);
         cmdMsg.acceleration = tmpVector;
         cmdMsg.header.stamp = ros::Time::now();
@@ -117,8 +130,9 @@ void cmd_callback(const ros::TimerEvent& event){
     }
 }
 
-void safe_callback(const ros::TimerEvent& event){
-
+void joy_callback(const sensor_msgs::Joy::ConstPtr& msg){
+    wind_x = msg->axes[0];
+    wind_y = msg->axes[1];
 }
 
 
@@ -131,6 +145,7 @@ int main(int argc, char **argv)
     drone_pub = nodeHandle.advertise<visualization_msgs::Marker>("drone_pose", 1000);
     global_pub = nodeHandle.advertise<visualization_msgs::Marker>("global_pose", 1000);
     ros::Subscriber sub_odom = nodeHandle.subscribe("drone_1/visual_slam/odom", 5 , odom_callback, ros::TransportHints().tcpNoDelay());
+    ros::Subscriber sub_joy = nodeHandle.subscribe("/joy", 5 , joy_callback, ros::TransportHints().tcpNoDelay());
     vis_polytope_pub  = nodeHandle.advertise<decomp_ros_msgs::PolyhedronArray>("polyhedron_corridor_mesh", 1000, true);
     flight_tunnel_pub = nodeHandle.advertise<decomp_ros_msgs::PolyhedronArray>("flight_tunnel", 1000, true);
     predict_pub = nodeHandle.advertise<nav_msgs::Path>("predict_path", 1000);
