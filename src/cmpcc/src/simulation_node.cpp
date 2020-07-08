@@ -162,7 +162,7 @@ int main(int argc, char **argv)
     while(ros::ok()){
         ros::Time nowT = ros::Time::now();
         cmd_pub.publish(cmdMsg);
-        if ((nowT-startT).toSec() > 5){
+        if ((nowT-startT).toSec() > 3){
             cout << "start_time_stamp: " << nowT << endl;
             break;
         }

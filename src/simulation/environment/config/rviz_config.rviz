@@ -8,6 +8,7 @@ Panels:
         - /Status1
         - /Axes1
         - /Drone1/Robot1
+        - /GlobalMap1
         - /GlobalMap1/GlobalMap1
         - /Planning1/SpatialCurve1
         - /Planning1/SpatialCurve1/Namespaces1
@@ -139,14 +140,14 @@ Visualization Manager:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 5.046831130981445
+            Max Value: 1.9997586011886597
             Min Value: 0.0010000000474974513
             Value: true
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
           Color: 186; 186; 186
-          Color Transformer: FlatColor
+          Color Transformer: AxisColor
           Decay Time: 0
           Enabled: true
           Invert Rainbow: false
