@@ -23,7 +23,7 @@ paper summited: [cmpcc-paper](https://arxiv.org/abs/2007.03271)
 ## Prerequisites
 Our software is developed and tested in Ubuntu 18.04, ROS Melodic. Other version may require minor modification. 
 
-You can clone this 
+You can clone this repository: 
 ```
 git clone https://github.com/ZJU-FAST-Lab/CMPCC.git
 cd CMPCC
