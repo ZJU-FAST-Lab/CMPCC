@@ -52,14 +52,14 @@
   <build_depend>message_generation</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
-  <build_depend>decomp_ros_msgs</build_depend>
+  <build_depend>quadrotor_msgs</build_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
-  <build_export_depend>decomp_ros_msgs</build_export_depend>>
+  <build_export_depend>quadrotor_msgs</build_export_depend>
   <exec_depend>message_runtime</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
-  <exec_depend>decomp_ros_msgs</exec_depend>
+  <exec_depend>quadrotor_msgs</exec_depend>
   <build_depend>visualization_msgs</build_depend>
   <build_export_depend>visualization_msgs</build_export_depend>
   <exec_depend>visualization_msgs</exec_depend>

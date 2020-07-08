@@ -8,7 +8,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -w -g -fPIC")
 find_package(catkin REQUIRED COMPONENTS
         message_generation
         message_runtime
-        decomp_ros_msgs
+        # decomp_ros_msgs
+        quadrotor_msgs
         roscpp
         roslib
         )
