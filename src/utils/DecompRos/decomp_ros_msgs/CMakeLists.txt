@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(decomp_ros_msgs)
 
-set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -w -g -Wno-deprecated -fPIC")
-
 find_package(catkin REQUIRED COMPONENTS
   #armadillo
   roscpp
