@@ -6,7 +6,7 @@ Corridor-based Model Predictive Contouring Control for Aggressive Drone Flight
 
 **Author**: Jialin Ji, Xin Zhou and [Fei Gao](https://ustfei.com/) from the [ZJU Fast Lab](www.kivact.com/). 
 
-**Related Paper**: [CMPCC: Corridor-based Model PredictiveContouring Control for Aggressive Drone Flight](https://arxiv.org/abs/2007.03271), Jialin Ji, Xin Zhou, Chao Xu, Fei Gao, summited to ISER.
+**Related Paper**: [CMPCC: Corridor-based Model PredictiveContouring Control for Aggressive Drone Flight](https://arxiv.org/abs/2007.03271), Jialin Ji, Xin Zhou, Chao Xu, Fei Gao, sumitted to ISER.
 
 **Video Links**: [youtube](https://www.youtube.com/watch?v=_7CzBh-0wQ0) or [bilibili](https://www.bilibili.com/video/BV1cZ4y1u7Ur)
 
