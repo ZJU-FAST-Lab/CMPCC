@@ -48,8 +48,8 @@ args="-d $(find environment)/config/rviz_vis.rviz"/>
 
 <node pkg="odom_visualization" name="odom_visualization" type="odom_visualization" output="screen">
     <remap from="~odom" to="/vins_estimator/imu_propagate"/>
-    <param name="base_frame"       value="/map"/>
-    <param name="target_frame"     value="/map"/>
+    <param name="base_frame"       value="map"/>
+    <param name="target_frame"     value="map"/>
     <param name="tf45"     value="true"/>
     <param name="color/a" value="0.8"/>    
     <param name="color/r" value="1.0"/>        

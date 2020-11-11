@@ -1,7 +1,7 @@
 /*
  *     [begin_description]
  *     Boost bind pull the placeholders, _1, _2, ... into global
- *     namespace. This can conflict with the C++03 TR1 and C++11 
+ *     namespace. This can conflict with the C++03 TR1 and c++17 
  *     std::placeholders. This header provides a workaround for 
  *     this problem.
  *     [end_description]

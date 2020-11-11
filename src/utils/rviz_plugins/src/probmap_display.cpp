@@ -309,7 +309,7 @@ void ProbMapDisplay::update( float wall_dt, float ros_dt )
   frame_ = current_map_->header.frame_id;
   if (frame_.empty())
   {
-    frame_ = "/map";
+    frame_ = "map";
   }
 
   // Expand it to be RGB data

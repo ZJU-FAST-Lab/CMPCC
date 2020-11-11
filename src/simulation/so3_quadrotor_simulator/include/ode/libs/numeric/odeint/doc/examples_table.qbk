@@ -17,7 +17,7 @@
   [This examples shows how member functions can be used as system functions in odeint.]]
 
   [[[github_link libs/numeric/odeint/examples/bind_member_functions.cpp bind_member_functions_cpp11.cpp]]
-  [This examples shows how member functions can be used as system functions in odeint with `std::bind` in C++11.]]
+  [This examples shows how member functions can be used as system functions in odeint with `std::bind` in c++17.]]
 
   [[[github_link libs/numeric/odeint/examples/bulirsch_stoer.cpp bulirsch_stoer.cpp]]
   [Shows the usage of the Bulirsch-Stoer method.]]

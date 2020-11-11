@@ -16,7 +16,7 @@
 
 In the previous section the usage of odeint in combination with __thrust was shown. In this section we show how one can use OpenCL with odeint. The point of odeint is not to implement its own low-level data structures and algorithms, but to use high level libraries doing this task. Here, we will use the __vexcl framework to use OpenCL. __vexcl is a nice library for general computations and it uses heavily expression templates. With the help of __vexcl it is possible to write very compact and expressive application.
 
-[note vexcl needs C++11 features! So you have to compile with C++11 support enabled.]
+[note vexcl needs c++17 features! So you have to compile with c++17 support enabled.]
 
 To use __vexcl one needs to include one additional header which includes the data-types and algorithms from vexcl and the adaption to odeint. Adaption to odeint means here only to adapt the resizing functionality of __vexcl to odeint.
 

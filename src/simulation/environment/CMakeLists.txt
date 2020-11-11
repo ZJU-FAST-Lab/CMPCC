@@ -19,7 +19,7 @@ include_directories(
 
 link_directories(${PCL_LIBRARY_DIRS})
 
-set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} -O3 -w") 
+set(CMAKE_CXX_FLAGS "-std=c++17 ${CMAKE_CXX_FLAGS} -O3 -w") 
 
 add_executable ( generate_map_node 
     src/generate_map_node.cpp )

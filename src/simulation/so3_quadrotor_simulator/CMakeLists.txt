@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(so3_quadrotor_simulator)
 
-add_compile_options(-std=c++11)
+add_compile_options(-std=c++17)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
