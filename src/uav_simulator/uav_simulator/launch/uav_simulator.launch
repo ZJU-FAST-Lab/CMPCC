@@ -1,0 +1,43 @@
+<launch>
+
+<node pkg="rviz" name="rviz" type="rviz" output="log"
+  args="-d $(find uav_simulator)/config/rviz_config.rviz">
+</node>
+
+<include file="$(find map_generator)/launch/map_generator.launch">
+
+</include>
+
+<group ns="drone0">
+
+  <node pkg="nodelet" type="nodelet" name="manager" args="manager" output="screen"/>
+
+  <node pkg="nodelet" type="nodelet" name="so3_quadrotor"
+    args="load so3_quadrotor/Nodelet manager" output="screen">
+  <!-- <node pkg="nodelet" type="nodelet" name="so3_quadrotor"
+    args="standalone so3_quadrotor/Nodelet" output="screen"> -->
+    <rosparam file="$(find uav_simulator)/config/so3_quadrotor.yaml"/>
+    <remap from="~odom" to="odom"/>
+    <remap from="~imu"  to="imu" />
+    <remap from="~so3cmd" to="so3cmd"/>
+    <remap from="~vis" to="vis"/>
+  </node>
+  <node pkg="nodelet" type="nodelet" name="so3_controller"
+    args="load so3_controller/Nodelet manager" output="screen">
+  <!-- <node pkg="nodelet" type="nodelet" name="so3_controller"
+    args="standalone so3_controller/Nodelet" output="screen"> -->
+    <rosparam file="$(find uav_simulator)/config/so3_controller.yaml"/>
+    <remap from="~odom" to="odom"/>
+    <remap from="~imu"  to="imu" />
+    <remap from="~so3cmd" to="so3cmd"/>
+    <remap from="~position_cmd" to="position_cmd"/>
+  </node>
+
+  <node pkg="cmpcc" name="simulation_node" type="simulation_node" output="screen">
+    <remap from="~odom" to="odom"/>
+    <remap from="~position_cmd" to="position_cmd"/>
+  </node>
+
+</group>
+
+</launch>

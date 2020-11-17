@@ -7,12 +7,12 @@ using namespace std;
 namespace ft{
     DisplayMsgs::DisplayMsgs(Map &map_, int horizon_):map(map_), horizon(horizon_){
         // initialize msgs:
-        refTraj_msg.header.frame_id = "map";
-        trajPred_msg.header.frame_id = "map";
-        corridor_array_msg.header.frame_id = "map";
-        tunnel_array_msg.header.frame_id = "map";
-        empty_poly_msg.header.frame_id = "map";
-        drone_msg.header.frame_id = "map";
+        refTraj_msg.header.frame_id = "world";
+        trajPred_msg.header.frame_id = "world";
+        corridor_array_msg.header.frame_id = "world";
+        tunnel_array_msg.header.frame_id = "world";
+        empty_poly_msg.header.frame_id = "world";
+        drone_msg.header.frame_id = "world";
         drone_msg.type = visualization_msgs::Marker::ARROW;
         drone_msg.action = visualization_msgs::Marker::ADD;
         drone_msg.scale.x = 0.06;
@@ -22,6 +22,7 @@ namespace ft{
         drone_msg.color.r = 1;
         drone_msg.color.g = 0;
         drone_msg.color.b = 0;
+        drone_msg.pose.orientation.w = 1;
         theta_msg = drone_msg;
         theta_msg.color.r = 0;
         theta_msg.color.b = 1;

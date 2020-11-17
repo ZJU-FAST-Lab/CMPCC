@@ -67,7 +67,7 @@ void mpc_callback(const ros::TimerEvent& event){
     // calculate stateMPC
     stateMpc = (stateOdom - stateOdomPrevious)/odomT*(tMpc-tOdom).toSec() + stateOdom;
     // update some state from last horizon
-    if (fail_times > 2){
+    if (fail_times > 3){
         stateMpc.coeffRef( 2, 0) = 0;
         stateMpc.coeffRef( 5, 0) = 0;
         stateMpc.coeffRef( 8, 0) = 0;
@@ -76,7 +76,7 @@ void mpc_callback(const ros::TimerEvent& event){
         simSolver.initStatus = true;
         mpcInit = false;
         if( simSolver.solveMpcQp(stateMpc) ){
-            cout << "come on! your disturbance too fierce!" << endl;
+            ROS_ERROR("come on! Your disturbance too fierce!");
             ros::shutdown();
         }
         else{
@@ -131,8 +131,8 @@ void cmd_callback(const ros::TimerEvent& event){
 }
 
 void joy_callback(const sensor_msgs::Joy::ConstPtr& msg){
-    wind_x = msg->axes[0];
-    wind_y = msg->axes[1];
+    wind_x = 3 * msg->axes[0];
+    wind_y = 3 * msg->axes[1];
 }
 
 
@@ -140,23 +140,23 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "simulation_node");
     ros::NodeHandle nodeHandle;
-    cmd_pub = nodeHandle.advertise<quadrotor_msgs::PositionCommand>("drone_1/position_cmd",10);
-    refer_pub = nodeHandle.advertise<nav_msgs::Path>("refer_path", 1000);
-    drone_pub = nodeHandle.advertise<visualization_msgs::Marker>("drone_pose", 1000);
-    global_pub = nodeHandle.advertise<visualization_msgs::Marker>("global_pose", 1000);
-    ros::Subscriber sub_odom = nodeHandle.subscribe("drone_1/visual_slam/odom", 5 , odom_callback, ros::TransportHints().tcpNoDelay());
+    cmd_pub = nodeHandle.advertise<quadrotor_msgs::PositionCommand>("position_cmd",1);
+    refer_pub = nodeHandle.advertise<nav_msgs::Path>("refer_path", 1);
+    drone_pub = nodeHandle.advertise<visualization_msgs::Marker>("drone_pose", 1);
+    global_pub = nodeHandle.advertise<visualization_msgs::Marker>("global_pose", 1);
+    ros::Subscriber sub_odom = nodeHandle.subscribe("odom", 5 , odom_callback, ros::TransportHints().tcpNoDelay());
     ros::Subscriber sub_joy = nodeHandle.subscribe("/joy", 5 , joy_callback, ros::TransportHints().tcpNoDelay());
-    vis_polytope_pub  = nodeHandle.advertise<decomp_ros_msgs::PolyhedronArray>("polyhedron_corridor_mesh", 1000, true);
-    flight_tunnel_pub = nodeHandle.advertise<decomp_ros_msgs::PolyhedronArray>("flight_tunnel", 1000, true);
-    predict_pub = nodeHandle.advertise<nav_msgs::Path>("predict_path", 1000);
-    globalOdom_pub = nodeHandle.advertise<nav_msgs::Odometry>("globalOdom", 1000);
+    vis_polytope_pub  = nodeHandle.advertise<decomp_ros_msgs::PolyhedronArray>("polyhedron_corridor_mesh", 1, true);
+    flight_tunnel_pub = nodeHandle.advertise<decomp_ros_msgs::PolyhedronArray>("flight_tunnel", 1, true);
+    predict_pub = nodeHandle.advertise<nav_msgs::Path>("predict_path", 1);
+    globalOdom_pub = nodeHandle.advertise<nav_msgs::Odometry>("globalOdom", 1);
 
     ros::Timer timer_mpc = nodeHandle.createTimer(ros::Duration(mpcT), mpc_callback);
     ros::Timer timer_cmd = nodeHandle.createTimer(ros::Duration(0.01), cmd_callback);
 
     ros::MultiThreadedSpinner spinner(4);
 
-    cmdMsg.header.frame_id = "map";
+    cmdMsg.header.frame_id = "world";
     
     // init position: 
     simSolver.map.getGlobalCommand(0, pDrone);
@@ -178,7 +178,6 @@ int main(int argc, char **argv)
         ros::Time nowT = ros::Time::now();
         cmd_pub.publish(cmdMsg);
         if ((nowT-startT).toSec() > 3){
-            cout << "start_time_stamp: " << nowT << endl;
             break;
         }
         loopRate.sleep();

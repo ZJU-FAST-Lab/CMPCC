@@ -3,6 +3,4 @@ devel
 bag
 screen.txt
 .catkin_workspace
-
-
-
+src/CMakeLists.txt

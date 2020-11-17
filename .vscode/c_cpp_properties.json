@@ -1,17 +1,20 @@
 {
     "configurations": [
         {
-            "name": "Linux",
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
             "includePath": [
-                "${workspaceFolder}/**",
-                "/usr/include/**",
-                "/opt/ros/melodic/include/**"
+                "/home/ji/ros_ws/simulator/devel/include/**",
+                "/opt/ros/noetic/include/**",
+                "/home/ji/ros_ws/simulator/src/uav_simulator/mockamap/include/**",
+                "/home/ji/ros_ws/simulator/src/uav_simulator/so3_controller/include/**",
+                "/home/ji/ros_ws/simulator/src/uav_simulator/so3_quadrotor/include/**",
+                "/usr/include/**"
             ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
+            "name": "ROS",
+            "compilerPath": "/usr/bin/gcc"
         }
     ],
     "version": 4

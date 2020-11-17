@@ -160,7 +160,7 @@ int main(int argc, char **argv)
 
     ros::MultiThreadedSpinner spinner(4);
 
-    cmdMsg.header.frame_id = "map";
+    cmdMsg.header.frame_id = "world";
 
     // vio
     w_R_odom = Matrix3d::Identity();

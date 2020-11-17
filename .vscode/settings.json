@@ -1,11 +1,18 @@
 {
-    "python.autoComplete.extraPaths": [
-        "${workspaceFolder}/devel/lib/python2.7/dist-packages",
-        "/opt/ros/melodic/lib/python2.7/dist-packages"
-    ],
-    "files.associations": {
-        "ostream": "cpp",
-        "cmath": "cpp",
-        "core": "cpp"
-    }
+  "python.autoComplete.extraPaths": [
+    "/home/ji/ros_ws/simulator/devel/lib/python3/dist-packages",
+    "/opt/ros/noetic/lib/python3/dist-packages"
+  ],
+  "files.associations": {
+    "*.ipp": "cpp",
+    "alignedvector3": "cpp",
+    "csignal": "cpp",
+    "*.tcc": "cpp",
+    "codecvt": "cpp",
+    "forward_list": "cpp",
+    "filesystem": "cpp",
+    "regex": "cpp",
+    "future": "cpp",
+    "valarray": "cpp"
+  }
 }

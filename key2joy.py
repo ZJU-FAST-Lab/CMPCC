@@ -25,7 +25,7 @@ def main():
 
     # init joy message
     joy_ = Joy()    
-    joy_.header.frame_id = 'map'
+    joy_.header.frame_id = 'world'
     for i in range(8):
       joy_.axes.append(0.0)
     for i in range(11):

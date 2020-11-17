@@ -1,0 +1,6 @@
+<launch>
+<node pkg ="map_generator" name ="map_generator_node" type ="map_generator_node" output = "screen">      
+  <param name="sensing/rate"   value="2"/>
+  <param name="map/file_name"   value="map.pcd"/>
+</node>
+</launch>

@@ -57,7 +57,7 @@ void odom_callback(const nav_msgs::Odometry& odom){
     pos = w_R_odom.transpose() * (pos - w_t_odom);
     vel = w_R_odom.transpose() * vel;
     acc = w_R_odom.transpose() * acc;
-    cmdMsg.header.frame_id = "map";
+    cmdMsg.header.frame_id = "world";
     cmdMsg.header.seq = mycount++;
     cmdMsg.header.stamp = ros::Time::now();
 
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
 
     ros::MultiThreadedSpinner spinner(4);
 
-    cmdMsg.header.frame_id = "map";
+    cmdMsg.header.frame_id = "world";
     cmdMsg.header.seq = mycount++;
     cmdMsg.header.stamp = ros::Time::now();
 
