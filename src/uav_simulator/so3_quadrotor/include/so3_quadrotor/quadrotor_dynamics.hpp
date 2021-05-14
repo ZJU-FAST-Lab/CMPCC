@@ -126,7 +126,7 @@ class Quadrotor {
     double resistance = 0.1 *                                        // C
                         3.14159265 * (config_.arm_length) * (config_.arm_length) * // S
                         state.v.norm() * state.v.norm();
-    Eigen::Vector3d vnorm = state.v.normalized();
+    Eigen::Vector3d vnorm = state.v.norm() > 0 ? state.v.normalized() : state.v;
     state_dot.x = state.v;
     state_dot.v = -Eigen::Vector3d(0, 0, config_.g) + thrust * R.col(2) / config_.mass - resistance * vnorm / config_.mass;
     state_dot.R = R * omega_vee;
